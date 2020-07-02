@@ -1,5 +1,5 @@
 import firebase from '../../database/Firebase'
-import Sqlite from '../../database/Sqlite';
+import Sqlite from '../../database/Sqlite'
 import {CONNECTION_TYPES, DATABASE_CONNECTION} from '../../database/database-configuration'
 
 const db = new Sqlite();

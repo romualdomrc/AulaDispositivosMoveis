@@ -1,59 +1,31 @@
 import React from 'react';
 import { View, Text, TextInput, Button, ActivityIndicator, Alert } from 'react-native'; 
-//import firebase from 'firebase';
-import firebase from '../../database/Firebase'
 import { useNavigation } from '@react-navigation/native';
+
+import * as LoginService from './LoginService'
+
+const user = "romualdomrc@gmail.com"
+const password = "123456"
 
 class LoginScreen extends React.Component {
 
     constructor(props){
         super(props);
-
         this.state = {
             mail: '',  
             password: '',
         }
     }
 
-    componentDidMount() {
- 
-        firebase.auth().signInWithEmailAndPassword("romualdomrc@gmail.com", "123456")
-            .then(user => {
-                console.log("usuario logado ", user)
-            })
-            .catch(error => {
-                console.log("erro ", error)
-            })
-            .finally(() => {
-                console.log("terminou")
-            })
-        
+    async componentDidMount() {
+        await LoginService.autoAuthenticate(user, password)
     }    
 
-    tryLogin(){
-
-
+    async tryLogin(){
         console.log("usuario", this.state.mail," senha ",this.state.password);
-//destructing
         const { mail, password } = this.state;
         const { navigation } = this.props;
-//promisse
-        firebase.auth().signInWithEmailAndPassword(mail, password)
-            .then(user => {
-                console.log("usuario logado ", user);
-                navigation.navigate('ContentScreen');
-                Alert.alert('Usuário logado com sucesso','',[{text:'OK'}]);
-                
-            })
-            .catch(error => {
-//                console.log("erro ", error)
-                //if (error.code === 'auth/user-not-found')
-            })
-            .finally(() => {
-                console.log("terminou")
-            })
-        
-
+        await LoginService.authenticate(mail, password, navigation)
     }
 
     onChangeMail(value){
@@ -63,8 +35,6 @@ class LoginScreen extends React.Component {
     onChangePassword(value){
         this.setState({password: value});
     }
-
-
 
     render() {
         return(
