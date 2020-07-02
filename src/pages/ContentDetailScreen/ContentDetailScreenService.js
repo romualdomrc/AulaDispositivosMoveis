@@ -18,7 +18,6 @@ export const updateContentDB = (id,data, database) => {
         )
 		.then(()=>{
 			console.log("documento atualizado com sucesso ", id);
-			navigation.navigate('ContentScreen');
 		})
 		.catch((error) =>{
 			console.log("Erro ao atualizar o documento ", id, error);
@@ -35,7 +34,6 @@ export const deleteContentDB = (id, database) => {
         firebase.firestore().collection('contents').doc(id).delete()
         .then(()=>{
 			console.log("documento apagado com sucesso ", id);
-			navigation.navigate('ContentScreen');
         })
         .catch((error) =>{
 			console.log("Erro ao apagar o documento ", id, error);

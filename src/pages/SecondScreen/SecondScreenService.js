@@ -18,7 +18,6 @@ export const saveContentDB = (data, database) => {
         )
         .then(()=>{
             console.log("Salvou");
-            navigation.navigate("ContentScreen");
         })
         .catch((error)=>{
             console.log("Erro ao salvar o conteudo", error);

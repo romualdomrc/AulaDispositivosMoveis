@@ -57,7 +57,7 @@ export default class Sqlite {
                   });
                 }
 
-                console.log(contents);
+                // console.log(contents);
 
                 resolve(contents);
               });
