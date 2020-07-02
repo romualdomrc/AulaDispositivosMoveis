@@ -1,10 +1,10 @@
 import React from 'react';
 import { ActivityIndicator, ScrollView } from 'react-native';
-//import firebase from '../database/Firebase'
-import Sqlite from '../database/Sqlite';
+//import firebase from '../../database/Firebase'
+import Sqlite from '../../database/Sqlite';
 
-import { Fab, TexT, VieW } from "../styles/styles";
-import ContentItem from '../components/ContentItem';
+import { Fab, TexT, VieW } from "../../styles/styles";
+import ContentItem from '../../components/ContentItem';
 
 import { useNavigation } from '@react-navigation/native';
 

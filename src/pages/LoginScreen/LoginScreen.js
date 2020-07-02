@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button, ActivityIndicator, Alert } from 'react-native'; 
 //import firebase from 'firebase';
-import firebase from '../database/Firebase'
+import firebase from '../../database/Firebase'
 import { useNavigation } from '@react-navigation/native';
 
 class LoginScreen extends React.Component {

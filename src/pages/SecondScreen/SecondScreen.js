@@ -1,12 +1,9 @@
 import React from 'react';
 import { View, TextInput, Button, Alert } from 'react-native'; 
-//import firebase from '../database/Firebase'
-import Sqlite from '../database/Sqlite';
-
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
-const db = new Sqlite();
+import { saveContentDB } from './SecondScreenService'
 
 class SecondScreen extends React.Component {
 
@@ -29,33 +26,14 @@ class SecondScreen extends React.Component {
 
   saveContent(){
     const { navigation } = this.props;
-/*
-    firebase.firestore().collection('contents').add(
-      {
-        name:this.state.name,
-        desc:this.state.desc,
-        img:this.state.img,
-      }
-    )
-    .then(()=>{
-      console.log("Salvou");
-      navigation.navigate("ContentScreen");
-    })
-    .catch((error)=>{
-      console.log("Erro ao salvar o conteudo", error);
-      Alert.alert('Não foi possível salvar o documento','',[{text:'OK'}]);      
-    })
-*/
     const { database } = this.props.route.params;
     const data = {
       name: this.state.name,
       desc: this.state.desc,
       img: this.state.img,
     }
-    db.addContent(data, database);
+    saveContentDB(data, database)
     navigation.navigate("ContentScreen");
-
-  
   }
 
 

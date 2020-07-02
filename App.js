@@ -1,9 +1,9 @@
 import React from 'react';
  
-import LoginScreen from './src/pages/LoginScreen';
-import ContentScreen from './src/pages/ContentScreen';
-import SecondScreen from './src/pages/SecondScreen';
-import ContentDetailScreen from './src/pages/ContentDetailScreen';
+import LoginScreen from './src/pages/LoginScreen/LoginScreen';
+import ContentScreen from './src/pages/ContentScreen/ContentScreen';
+import SecondScreen from './src/pages/SecondScreen/SecondScreen';
+import ContentDetailScreen from './src/pages/ContentDetailScreen/ContentDetailScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

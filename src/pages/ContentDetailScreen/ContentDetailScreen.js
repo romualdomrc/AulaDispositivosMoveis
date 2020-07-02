@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, TextInput, Button, Alert } from 'react-native'; 
-//import firebase from '../database/Firebase'
-import Sqlite from '../database/Sqlite';
+// import firebase from '../../database/Firebase'
+import Sqlite from '../../database/Sqlite';
 
-import { ScrollVieW } from "../styles/styles";
+import { ScrollVieW } from "../../styles/styles";
 
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
