@@ -7,22 +7,30 @@ let database;
 
 export const findContentList = async () => {
     if(DATABASE_CONNECTION == CONNECTION_TYPES.LOCAL) {
-        database = await db.initDB();
-        const list = await db.listContents(database)
-        const data = {database: database, list: list}
-        return data
+        try {
+            database = await db.initDB();
+            const list = await db.listContents(database)
+            const data = {database: database, list: list}
+            return data
+        } catch(e) {
+            console.error(e)
+            throw e
+        }
+        
     }
     else if(DATABASE_CONNECTION == CONNECTION_TYPES.CLOUD) {
-        
-        const prom =  new Promise(async function (resolve, reject) {
-            firebase.firestore().collection('contents').onSnapshot(async (query) => {
-                const list = contentUpdate(query)
-                const data = {database: firebase, list: list}
-                resolve(data)
+        try {
+            return new Promise(async function (resolve, reject) {
+                firebase.firestore().collection('contents').onSnapshot(async (query) => {
+                    const list = contentUpdate(query)
+                    const data = {database: firebase, list: list}
+                    resolve(data)
+                })
             })
-        })
-        
-        return prom.then(dat => dat)
+        } catch(e) {
+            console.error(e)
+            throw e
+        }
     }
 }
 
