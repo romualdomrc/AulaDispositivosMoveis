@@ -1,4 +1,4 @@
-import firebase from '../../database/Firebase'
+import firebase from './Firebase'
 
 export const autoAuthenticate = (mail, password) => {
     firebase.auth().signInWithEmailAndPassword(mail, password)

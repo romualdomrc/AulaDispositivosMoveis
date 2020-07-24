@@ -1,6 +1,6 @@
-import firebase from '../../database/Firebase'
-import Sqlite from '../../database/Sqlite'
-import {CONNECTION_TYPES, DATABASE_CONNECTION} from '../../database/database-configuration'
+import firebase from './Firebase'
+import Sqlite from './Sqlite'
+import {CONNECTION_TYPES, DATABASE_CONNECTION} from './database-configuration'
 
 const db = new Sqlite();
 

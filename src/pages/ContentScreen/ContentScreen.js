@@ -3,7 +3,7 @@ import { ActivityIndicator, ScrollView } from 'react-native'
 import { Fab, TexT, VieW } from "../../styles/styles"
 import ContentItem from '../../components/ContentItem'
 import { useNavigation } from '@react-navigation/native'
-import * as ContentScreenService from './ContentScreenService'
+import * as ContentScreenService from '../../database/ContentScreenService'
 
 class ContentScreen extends React.Component {
     
