@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Button, ActivityIndicator, Alert } from 'react-native'; 
 import { useNavigation } from '@react-navigation/native';
 
-import * as LoginService from '../../database/LoginService'
+import * as LoginService from '../../database/application-service'
 
 const user = "romualdomrc@gmail.com"
 const password = "123456"

@@ -3,7 +3,7 @@ import { View, TextInput, Button, Alert } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
-import * as SecondScreenService from "../../database/SecondScreenService";
+import * as SecondScreenService from "../../database/application-service";
 
 class SecondScreen extends React.Component {
 

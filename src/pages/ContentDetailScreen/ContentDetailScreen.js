@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollVieW } from "../../styles/styles";
 
-import * as ContentDetailScreenService from '../../database/ContentDetailScreenService'
+import * as ContentDetailScreenService from '../../database/application-service'
 
 class ContentDetailScreen extends React.Component {
 
