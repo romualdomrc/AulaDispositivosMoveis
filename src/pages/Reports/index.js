@@ -99,10 +99,10 @@ const Reports = ({navigation}) => {
         />
       </View>
 
-      <ScrollView>
+      <View>
         <EntrySummary days={relativeDays} />
         <EntryList days={relativeDays} category={category} />
-      </ScrollView>
+      </View>
 
       <ActionFooter>
         <ActionPrimaryButton

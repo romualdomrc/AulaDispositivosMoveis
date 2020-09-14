@@ -11,7 +11,7 @@ const Main = ({navigation}) => {
   return (
     <View style={styles.container}>
       <BalancePanel onNewEntryPress={() => navigation.navigate('NewEntry')} />
-      <ScrollView>
+      <View>
         <EntrySummary
           onPressActionButton={() => navigation.navigate('Reports')}
         />
@@ -19,7 +19,7 @@ const Main = ({navigation}) => {
           onEntryPress={entry => navigation.navigate('NewEntry', {entry}) }
           onPressActionButton={() => navigation.navigate('Reports')}
         />
-      </ScrollView>
+      </View>
     </View>
   )
 }
