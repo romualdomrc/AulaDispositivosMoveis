@@ -1,34 +1,31 @@
-import React from 'react';
-import {StatusBar, View, TouchableOpacity, StyleSheet} from 'react-native';
+import React from 'react'
+import {StatusBar, View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
-import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import BalancePanelLabel from './BalancePanelLabel';
-import BalancePanelChart from './BalancePanelChart';
+import BalancePanelLabel from './BalancePanelLabel'
+import BalancePanelChart from './BalancePanelChart'
 
-import useBalance from '../../hooks/useBalance';
+import useBalance from '../../hooks/useBalance'
 
-import Colors from '../../styles/Colors';
+import Colors from '../../styles/Colors'
 
 const BalancePanel = ({onNewEntryPress}) => {
-  const [balance] = useBalance();
+  const [balance] = useBalance()
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.violet} />
-      <LinearGradient
-        colors={[Colors.violet, Colors.blue]}
-        style={styles.panel}>
+      <View>
         <BalancePanelLabel currentBalance={balance} />
         <BalancePanelChart />
-      </LinearGradient>
+      </View>
       <TouchableOpacity style={styles.button} onPress={onNewEntryPress}>
         <Icon name="add" size={30} color={Colors.white} />
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -48,6 +45,6 @@ const styles = StyleSheet.create({
     marginTop: -25,
     marginRight: 10,
   },
-});
+})
 
-export default BalancePanel;
+export default BalancePanel

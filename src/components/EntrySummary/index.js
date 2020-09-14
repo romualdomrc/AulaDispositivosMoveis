@@ -1,15 +1,15 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React from 'react'
+import {View, StyleSheet} from 'react-native'
 
-import Container from '../Core/Container';
+import Container from '../Core/Container'
 
-import EntrySummaryChart from './EntrySummaryChart';
-import EntrySummaryList from './EntrySummaryList';
+import EntrySummaryChart from './EntrySummaryChart'
+import EntrySummaryList from './EntrySummaryList'
 
-import useBalanceSumByCategory from '../../hooks/useBalanceSumByCategory';
+import useBalanceSumByCategory from '../../hooks/useBalanceSumByCategory'
 
 const EntrySummary = ({days = 7, onPressActionButton}) => {
-  const [balanceSum] = useBalanceSumByCategory(days);
+  const [balanceSum] = useBalanceSumByCategory(days)
 
   return (
     <Container
@@ -22,14 +22,14 @@ const EntrySummary = ({days = 7, onPressActionButton}) => {
         <EntrySummaryList data={balanceSum} />
       </View>
     </Container>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   inner: {
     flexDirection: 'row',
     paddingVertical: 10,
   },
-});
+})
 
-export default EntrySummary;
+export default EntrySummary

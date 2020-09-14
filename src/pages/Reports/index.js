@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import {
   StatusBar,
   View,
@@ -6,51 +6,51 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-} from 'react-native';
+} from 'react-native'
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import ActionFooter, {
   ActionPrimaryButton,
-} from '../../components/Core/ActionFooter';
+} from '../../components/Core/ActionFooter'
 
-import BalanceLabel from '../../components/BalanceLabel';
-import EntrySummary from '../../components/EntrySummary';
-import EntryList from '../../components/EntryList';
-import RelativeDaysModal from '../../components/RelativeDaysModal';
-import CategoryModal from '../../components/CategoryModal';
+import BalanceLabel from '../../components/BalanceLabel'
+import EntrySummary from '../../components/EntrySummary'
+import EntryList from '../../components/EntryList'
+import RelativeDaysModal from '../../components/RelativeDaysModal'
+import CategoryModal from '../../components/CategoryModal'
 
-import Colors from '../../styles/Colors';
+import Colors from '../../styles/Colors'
 
 const Reports = ({navigation}) => {
   const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(
     false,
-  );
-  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
+  )
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false)
 
-  const [relativeDays, setRelativeDays] = useState(7);
+  const [relativeDays, setRelativeDays] = useState(7)
   const [category, setCategory] = useState({
     id: null,
     name: 'Todas Categorias',
-  });
+  })
 
   const onRelativeDaysPress = item => {
-    setRelativeDays(item);
-    onRelativeDaysClosePress();
-  };
+    setRelativeDays(item)
+    onRelativeDaysClosePress()
+  }
 
   const onCategoryPress = item => {
-    setCategory(item);
-    onCategoryClosePress();
-  };
+    setCategory(item)
+    onCategoryClosePress()
+  }
 
   const onRelativeDaysClosePress = () => {
-    setRelativeDaysModalVisible(false);
-  };
+    setRelativeDaysModalVisible(false)
+  }
 
   const onCategoryClosePress = () => {
-    setCategoryModalVisible(false);
-  };
+    setCategoryModalVisible(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -61,7 +61,7 @@ const Reports = ({navigation}) => {
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => {
-            setRelativeDaysModalVisible(true);
+            setRelativeDaysModalVisible(true)
           }}>
           <Text
             style={
@@ -82,7 +82,7 @@ const Reports = ({navigation}) => {
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => {
-            setCategoryModalVisible(true);
+            setCategoryModalVisible(true)
           }}>
           <Text style={styles.filterButtonText}>{category.name}</Text>
           <Icon
@@ -108,13 +108,13 @@ const Reports = ({navigation}) => {
         <ActionPrimaryButton
           title="Fechar"
           onPress={() => {
-            navigation.goBack();
+            navigation.goBack()
           }}
         />
       </ActionFooter>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -138,6 +138,6 @@ const styles = StyleSheet.create({
   filterButtonText: {
     color: Colors.champagneDark,
   },
-});
+})
 
-export default Reports;
+export default Reports

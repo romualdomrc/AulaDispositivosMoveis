@@ -5,20 +5,31 @@ import { createStackNavigator } from '@react-navigation/stack'
 const AppStack = createStackNavigator();
 
 import Loading from './pages/Loading'
+import Welcome from './pages/Welcome'
 import Main from './pages/Main'
 import NewEntry from './pages/NewEntry'
 import Reports from './pages/Reports'
-import Welcome from './pages/Welcome'
 
 export default function Routes() {
     return (
         <NavigationContainer>
             <AppStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
                 <AppStack.Screen name="Welcome" component={Welcome} />
-                <AppStack.Screen name="Loading" component={Loading} />
                 <AppStack.Screen name="Main" component={Main} />
-                <AppStack.Screen name="NewEntry" component={NewEntry} />
-                <AppStack.Screen name="Reports" component={Reports} />
+                <AppStack.Screen name="NewEntry" component={NewEntry} initialParams={{
+                    entry: {
+                        id: null,
+                        amount: 0,
+                        entryAt: new Date(),
+                        photo: null,
+                        address: null,
+                        latitude: null,
+                        longitude: null,
+                        category: {id: null, name: 'Selecione'},
+                    }
+                }}/>
+                {/* <AppStack.Screen name="Loading" component={Loading} />
+                <AppStack.Screen name="Reports" component={Reports} /> */}
             </AppStack.Navigator>
         </NavigationContainer>
     )
