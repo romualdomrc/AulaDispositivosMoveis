@@ -13,7 +13,8 @@ import Reports from './pages/Reports'
 export default function Routes() {
     return (
         <NavigationContainer>
-            <AppStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+            <AppStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Loading">
+                <AppStack.Screen name="Loading" component={Loading} />
                 <AppStack.Screen name="Welcome" component={Welcome} />
                 <AppStack.Screen name="Main" component={Main} />
                 <AppStack.Screen name="NewEntry" component={NewEntry} initialParams={{
@@ -28,8 +29,7 @@ export default function Routes() {
                         category: {id: null, name: 'Selecione'},
                     }
                 }}/>
-                {/* <AppStack.Screen name="Loading" component={Loading} />
-                <AppStack.Screen name="Reports" component={Reports} /> */}
+                <AppStack.Screen name="Reports" component={Reports} />
             </AppStack.Navigator>
         </NavigationContainer>
     )
