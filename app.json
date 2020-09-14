@@ -1,20 +1,21 @@
 {
   "expo": {
-    "sdkVersion": "37.0.0",
-    "name": "aula0204",
-    "slug": "aula0204",
+    "name": "SmartMoney",
+    "slug": "smartmoney",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android",
+      "android", 
       "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/logo-white.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/logo-white@3x.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
