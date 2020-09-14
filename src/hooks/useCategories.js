@@ -14,7 +14,7 @@ const useCategories = () => {
   const [initCategories, setInitCategories] = useState([])
 
   useEffect(() => {
-    console.log('alterar aqui') //FIXME
+    //FIXME
   //   const loadDebitCategories = async () => {
   //     const data = await getDebitCategories()
   //     setDebitCategories(data)

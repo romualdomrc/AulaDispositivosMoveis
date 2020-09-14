@@ -11,6 +11,7 @@ import WelcomeBalanceInput from './WelcomeBalanceInput'
 import useCategories from '../../hooks/useCategories'
 // import {saveEntry} from '../../services/Entries'
 // import {setInitialized} from '../../services/Welcome'
+import * as Service from '../../services/application-service'
 
 import Colors from '../../styles/Colors'
 import Logo from '../../assets/logo-white.png'
@@ -20,7 +21,10 @@ const Welcome = ({navigation}) => {
   const [amount, setAmount] = useState(0)
 
   const onSavePress = () => {
-    console.log('alterar aqui') //FIXME
+    Service.testar()
+    // .then(r => console.log(r))
+    
+    //FIXME
     // saveEntry({
     //   amount: parseFloat(amount),
     //   isInit: true,

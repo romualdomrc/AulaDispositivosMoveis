@@ -10,7 +10,7 @@ const useBalance = () => {
       // const value = await getBalance()
       // setBalance(value)
       setBalance(1000)
-      console.log('alterar aqui') //FIXME
+      //FIXME
     }
 
     loadBalance()

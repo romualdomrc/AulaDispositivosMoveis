@@ -14,7 +14,7 @@ const useEntries = (days = 7, category) => {
   //   }
 
   //   loadEntries()
-  console.log('alterar aqui') //FIXME
+  //FIXME
   }, [days, category])
 
   return [entries, saveEntry, deleteEntry]

@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-const AppStack = createStackNavigator();
+const AppStack = createStackNavigator()
 
 import Loading from './pages/Loading'
 import Welcome from './pages/Welcome'

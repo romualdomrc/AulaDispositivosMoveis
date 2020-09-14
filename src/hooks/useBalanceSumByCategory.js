@@ -9,7 +9,7 @@ const useBalanceSumByCategory = (days = 7) => {
     async function loadBalanceSumByCategory() {
       // const data = await getBalanceSumByCategory(days)
       // setBalanceSum([...data])
-      console.log('alterar aqui') //FIXME
+      //FIXME
     }
 
     loadBalanceSumByCategory()
