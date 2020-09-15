@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
-
 import CategoryModal from '../../../components/CategoryModal'
-
 import Colors from '../../../styles/Colors'
 
 const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
 		fontSize: 28,
 		color: Colors.white,
 		textAlign: 'center',
-	},
+	}
 })
 
 export default NewEntryCategoryPicker

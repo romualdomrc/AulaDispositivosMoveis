@@ -10,9 +10,8 @@ import NewEntryAddressPicker from './NewEntryAddressPicker'
 import NewEntryDeleteAction from './NewEntryDeleteAction'
 import useEntries from '../../hooks/useEntries'
 import Colors from '../../styles/Colors'
-import Service from '../../services/Service'
 
-const NewEntry = ({route, navigation}) => {
+const NewEntry = ({ navigation }) => {
 	const entry = {
 		id: null,
 		amount: 0,
@@ -25,7 +24,6 @@ const NewEntry = ({route, navigation}) => {
 	}
 
 	const [, saveEntry, deleteEntry] = useEntries()
-
 	const [debit, setDebit] = useState(entry.amount <= 0)
 	const [amount, setAmount] = useState(entry.amount)
 	const [category, setCategory] = useState(entry.category)
