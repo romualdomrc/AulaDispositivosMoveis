@@ -9,27 +9,27 @@ import EntrySummaryList from './EntrySummaryList'
 import useBalanceSumByCategory from '../../hooks/useBalanceSumByCategory'
 
 const EntrySummary = ({days = 7, onPressActionButton}) => {
-  const [balanceSum] = useBalanceSumByCategory(days)
+  	const [balanceSum] = useBalanceSumByCategory(days)
 
-  return (
-    <Container
-      title="Categorias"
-      actionLabelText={`Últimos ${days} dias`}
-      actionButtonText="Ver mais"
-      onPressActionButton={onPressActionButton}>
-      <View style={styles.inner}>
-        <EntrySummaryChart data={balanceSum} />
-        <EntrySummaryList data={balanceSum} />
-      </View>
-    </Container>
-  )
+	return (
+		<Container
+			title="Categorias"
+			actionLabelText={`Últimos ${days} dias`}
+			actionButtonText="Ver mais"
+			onPressActionButton={onPressActionButton}>
+			<View style={styles.inner}>
+				<EntrySummaryChart data={balanceSum} />
+				<EntrySummaryList data={balanceSum} />
+			</View>
+		</Container>
+	)
 }
 
 const styles = StyleSheet.create({
-  inner: {
-    flexDirection: 'row',
-    paddingVertical: 10,
-  },
+	inner: {
+		flexDirection: 'row',
+		paddingVertical: 10,
+	}
 })
 
 export default EntrySummary

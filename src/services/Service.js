@@ -5,24 +5,46 @@ var Service = {}
 
 if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
     Service = {
-        saveEntry: async (entry) => {
-            return await Storage.saveEntry(entry)
+        //ENTRIES----------------------------------------------------------------------------------------
+        getEntries: async (days, category) => {
+            return await Storage.getEntries(days, category)
         },
 
-        findEntry: async () => {
-            return await Storage.findEntry()
+        saveEntry: async (value, entry = {}) => {
+            return await Storage.saveEntry(value, entry = {})
+        },
+
+        deleteEntry: async (entry) => {
+            return await Storage.findEntry(entry)
+        },
+
+        //CATEGORIES----------------------------------------------------------------------------------------
+        setDefaultCategories: async () => {
+            return await Storage.setDefaultCategories()
+        },
+
+        getDefaultCategories: async () => {
+            return await Storage.getDefaultCategories()
+        },
+
+        getDebitCategories: async () => {
+            return Service.getDebitCategories()
+        },
+
+        getCreditCategories: async () => {
+            return Service.getCreditCategories()
+        },
+
+        getAllCategories: async () => {
+            return Service.getAllCategories()
+        },
+
+        getInitCategories: async () => {
+            return Service.getInitCategories()
         }
-        
-        // const setInitialized = async () => {
-        // 	await AsyncStorage.setItem('openingBalance', 'true')
-        // }
-        
-        // const cleanInitialized = async () => {
-        // 	await AsyncStorage.removeItem('openingBalance')
-        // }
-    
+
+        //CATEGORIES----------------------------------------------------------------------------------------
     }
 }
-
     
 export default Service

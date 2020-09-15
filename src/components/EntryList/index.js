@@ -1,35 +1,35 @@
-import React from 'react';
-import {FlatList} from 'react-native';
+import React from 'react'
+import {FlatList} from 'react-native'
 
-import Container from '../Core/Container';
+import Container from '../Core/Container'
 
-import EntryListItem from './EntryListItem';
+import EntryListItem from './EntryListItem'
 
-import useEntries from '../../hooks/useEntries';
+import useEntries from '../../hooks/useEntries'
 
 const EntryList = ({days = 30, category, onEntryPress, onPressActionButton}) => {
-  const [entries] = useEntries(days, category);
+	const [entries] = useEntries(days, category)
 
-  return (
-    <Container
-      title="Últimos lançamentos"
-      actionLabelText={`Últimos ${days} dias`}
-      actionButtonText="Ver mais"
-      onPressActionButton={onPressActionButton}>
-      <FlatList
-        data={entries}
-        keyExtractor={item => item.id}
-        renderItem={({item, index}) => (
-          <EntryListItem
-            entry={item}
-            isFirstItem={index === 0}
-            isLastItem={index === entries.length - 1}
-            onEntryPress={onEntryPress}
-          />
-        )}
-      />
-    </Container>
-  );
-};
+	return (
+		<Container
+		title="Últimos lançamentos"
+		actionLabelText={`Últimos ${days} dias`}
+		actionButtonText="Ver mais"
+		onPressActionButton={onPressActionButton}>
+		<FlatList
+			data={entries}
+			keyExtractor={item => item.id}
+			renderItem={({item, index}) => (
+				<EntryListItem
+					entry={item}
+					isFirstItem={index === 0}
+					isLastItem={index === entries.length - 1}
+					onEntryPress={onEntryPress}
+				/>
+			)}
+		/>
+		</Container>
+	)
+}
 
-export default EntryList;
+export default EntryList

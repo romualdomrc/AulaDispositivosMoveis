@@ -1,14 +1,16 @@
 import AsyncStorage from '@react-native-community/async-storage'
+import Service from '../Service'
 
 export const isInitialized = async () => {
-  const openingBalance = await AsyncStorage.getItem('openingBalance')
-  return openingBalance !== null && openingBalance === 'true'
+	await Service.setDefaultCategories()
+	const openingBalance = await AsyncStorage.getItem('openingBalance')
+	return openingBalance !== null && openingBalance === 'true'
 }
 
 export const setInitialized = async () => {
-  await AsyncStorage.setItem('openingBalance', 'true')
+  	await AsyncStorage.setItem('openingBalance', 'true')
 }
 
 export const cleanInitialized = async () => {
-  await AsyncStorage.removeItem('openingBalance')
+ 	 await AsyncStorage.removeItem('openingBalance')
 }

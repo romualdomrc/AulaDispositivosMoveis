@@ -13,7 +13,6 @@ import Colors from '../../styles/Colors'
 import Service from '../../services/Service'
 
 const NewEntry = ({route, navigation}) => {
-
 	const entry = {
 		id: null,
 		amount: 0,

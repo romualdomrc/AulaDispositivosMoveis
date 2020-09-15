@@ -1,24 +1,19 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
-// import {getEntries, saveEntry, deleteEntry} from '../services/Entries'
-const saveEntry = '1'
-const deleteEntry = '2'
+import Service from '../services/Service'
 
 const useEntries = (days = 7, category) => {
-  const [entries, setEntries] = useState([])
+	const [entries, setEntries] = useState([])
 
-  useEffect(() => {
-  //   async function loadEntries() {
-  //     const data = await getEntries(days, category)
-  //     setEntries(data)
-  //   }
+	useEffect(() => {
+		const loadEntries = async () => {
+			const data = await Service.getEntries(days, category)
+			setEntries(data)
+		}
+		loadEntries()
+	}, [days, category])
 
-  //   loadEntries()
-  //FIXME
-  }, [days, category])
-
-  return [entries, saveEntry, deleteEntry]
-  
+	return [entries, Service.saveEntry, Service.deleteEntry]
 }
 
 export default useEntries
