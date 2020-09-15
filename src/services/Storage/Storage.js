@@ -1,13 +1,35 @@
 import AsyncStorage from '@react-native-community/async-storage'
+import EntryListItem from '../../components/EntryList/EntryListItem'
+import _ from 'lodash';
+import moment from 'moment'
 
 export default Storage = {
 	//ENTRIES----------------------------------------------------------------------------------------
+
 	getEntries: async (days, category) => {
-		const data = await AsyncStorage.getItem('entries')
-		return JSON.parse(data)
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+
+		if (days > 0) {
+			const date = moment().subtract(days, 'days').toDate()
+			// console.log('getEntries :: days ', days)
+
+			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+		}
+
+		if (category && category.id) {
+			// console.log('getEntries :: category ', category)
+
+			entries = entries.filter(entry => entry.category === category)
+		}
+
+		entries = entries.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
+
+		// console.log('getEntries :: entries ', entries.length)
+
+		return entries
 	},
 
-	saveEntry: async (value, entry = {}) => {
+	saveEntry: async (value, entry) => {
 
 		let dadoTratado = {
 			id: value.id || entry.id,
@@ -32,9 +54,13 @@ export default Storage = {
 		return listaEntries
 	},
 
-	deleteEntry: async (entry) => {
-		const data = await AsyncStorage.getItem('entry')
-		return JSON.parse(data)
+	deleteEntry: async (delEntry) => {
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+		entries = entries.filter(entry => JSON.stringify(entry) !== JSON.stringify(delEntry))
+
+		await AsyncStorage.setItem('entries', JSON.stringify(entries))
+
+		return entries
 	},
 
 	//CATEGORIES----------------------------------------------------------------------------------------
@@ -206,15 +232,87 @@ export default Storage = {
 	getInitCategories: async () => {
 		const data = JSON.parse(await AsyncStorage.getItem('categories'))
 		return data.filter(category => category.isInit)
-	}
-	// const setInitialized = async () => {
-	// 	await AsyncStorage.setItem('openingBalance', 'true')
-	// }
+	},
+
+	//BALANCE----------------------------------------------------------------------------------------
+
+	getBalance: async (untilDays) => {
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+          
+		if (untilDays > 0) {
+			const date = moment().subtract(untilDays, 'days').toDate()
+		
+			entries = entries.filter(entry => new Date(entry.entryAt) < date)
+		}
+
+		return entries.reduce( ( soma, { amount } ) => soma+amount,0)
+	},
+
+	getBalanceSumByDate: async (days) => {
+		const startBalance = await Storage.getBalance(days) || 0
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+
+		if (days > 0) {
+			const date = moment().subtract(days, 'days').toDate()
+
+			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+		}
+
+		entries = entries.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
+
+		entries = _(entries)
+			.groupBy(({entryAt}) => moment(entryAt).format('YYYYMMDD'))
+			.map(entry => _.sumBy(entry, 'amount'))
+			.map((amount, index, collection) => {
+			return (
+				(index === 0 ? startBalance : 0) +
+				_.sum(_.slice(collection, 0, index)) +
+				amount
+			)
+			})
+
+		console.log('getBalanceSumByDate :: ', JSON.stringify(entries))
+
+		return entries
+
+	},
+
+	getBalanceSumByCategory: async (days, showOthers) => {
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+
+		if (days > 0) {
+			const date = moment().subtract(days, 'days').toDate()
+
+			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+		}
+
+		entries = _(entries)
+			.groupBy(({category: {id}}) => id)
+			.map(entry => ({category: _.omit(entry[0].category, 'entries'), amount: Math.abs(_.sumBy(entry, 'amount'))}))
+			.filter(({amount}) => amount > 0)
+			.orderBy('amount', 'desc')
+
+		const othersLimit = 5
+
+		if (showOthers && _(entries).size() > othersLimit) {
+			const data1 = _(entries).slice(0, othersLimit)
+			const data2 = [
+				{
+					category: {id: JSON.parse(await AsyncStorage.getItem('categories')).sort((e1, e2) => e2.id - e1.id)[0].id, name: 'Outros', color: Colors.metal},
+					amount: _(entries)
+						.slice(othersLimit)
+						.map(({amount}) => amount)
+						.sum(),
+				}
+			]
+		
+			entries = [...data1, ...data2]
+		}
+		
+		// console.log('getBalanceSumByCategory :: ', JSON.stringify(entries))
 	
-	// const cleanInitialized = async () => {
-	// 	await AsyncStorage.removeItem('openingBalance')
-	// }
-  
+		return entries
+	}
 }
 
 

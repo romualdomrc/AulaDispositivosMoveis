@@ -1,16 +1,14 @@
 import {useEffect, useState} from 'react'
 
-// import {getBalance} from '../services/Balance'
+import Service from '../services/Service'
 
 const useBalance = () => {
   const [balance, setBalance] = useState(0)
 
   useEffect(() => {
     async function loadBalance() {
-      // const value = await getBalance()
-      // setBalance(value)
-      setBalance(1000)
-      //FIXME
+      const value = await Service.getBalance()
+      setBalance(value)
     }
 
     loadBalance()

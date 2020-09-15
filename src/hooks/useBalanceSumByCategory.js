@@ -1,15 +1,14 @@
 import {useEffect, useState} from 'react'
-
-// import {getBalanceSumByCategory} from '../services/Balance'
+import Service from '../services/Service'
 
 const useBalanceSumByCategory = (days = 7) => {
   const [balanceSum, setBalanceSum] = useState([])
 
   useEffect(() => {
     async function loadBalanceSumByCategory() {
-      // const data = await getBalanceSumByCategory(days)
-      // setBalanceSum([...data])
-      //FIXME
+      const data = await Service.getBalanceSumByCategory(days)
+      setBalanceSum([...data])
+      console.log()
     }
 
     loadBalanceSumByCategory()

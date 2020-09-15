@@ -6,6 +6,7 @@ var Service = {}
 if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
     Service = {
         //ENTRIES----------------------------------------------------------------------------------------
+
         getEntries: async (days, category) => {
             return await Storage.getEntries(days, category)
         },
@@ -19,6 +20,7 @@ if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
         },
 
         //CATEGORIES----------------------------------------------------------------------------------------
+
         setDefaultCategories: async () => {
             return await Storage.setDefaultCategories()
         },
@@ -28,22 +30,34 @@ if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
         },
 
         getDebitCategories: async () => {
-            return Service.getDebitCategories()
+            return Storage.getDebitCategories()
         },
 
         getCreditCategories: async () => {
-            return Service.getCreditCategories()
+            return Storage.getCreditCategories()
         },
 
         getAllCategories: async () => {
-            return Service.getAllCategories()
+            return Storage.getAllCategories()
         },
 
         getInitCategories: async () => {
-            return Service.getInitCategories()
-        }
+            return Storage.getInitCategories()
+        },
 
-        //CATEGORIES----------------------------------------------------------------------------------------
+        //BALANCE----------------------------------------------------------------------------------------
+
+        getBalance: async (untilDays = 0) => {
+            return Storage.getBalance(untilDays)
+        },
+
+        getBalanceSumByDate: async (days) => {
+            return Storage.getBalanceSumByDate(days)
+        },
+
+        getBalanceSumByCategory: (days, showOthers = true) => {
+            return Storage.getBalanceSumByCategory(days, showOthers)
+        }
     }
 }
     
