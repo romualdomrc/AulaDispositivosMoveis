@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {StatusBar, ActivityIndicator, View, StyleSheet} from 'react-native'
 
-import {isInitialized} from '../../services/Welcome'
+import {isInitialized} from '../../services/Storage/Welcome'
 
 import Colors from '../../styles/Colors'
 

@@ -1,40 +1,6 @@
 // import firebase from './Firebase'
 import Sqlite from './Sqlite'
-import {CONNECTION_TYPES, DATABASE_CONNECTION} from './database-configuration'
-
-const db = new Sqlite();
-
-let database = db.initDB()
-
-if(DATABASE_CONNECTION == CONNECTION_TYPES.LOCAL) {
-    updateContentDB = (id,data) => {
-        db.updateContent(id, data, database)
-    }
-
-    deleteContentDB = (id) => {
-        db.deleteContent(id, database)
-    }
-
-    findContentList = async () => {
-        try {
-            const list = await db.listContents(database)
-            const data = {database: database, list: list}
-            return data
-        } catch(e) {
-            console.error(e)
-            throw e
-        }
-    }
-
-    saveContentDB = (data) => {
-        db.addContent(data, database)
-    }
-
-    testar = () => {
-        db.testar(database)
-    }
-
-}
+import {CONNECTION_TYPES, DATABASE_CONNECTION} from '../Config/database-configuration'
 
 // else if(DATABASE_CONNECTION == CONNECTION_TYPES.CLOUD) {
 //     updateContentDB = (id,data, database) => {

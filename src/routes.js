@@ -17,18 +17,7 @@ export default function Routes() {
                 <AppStack.Screen name="Loading" component={Loading} />
                 <AppStack.Screen name="Welcome" component={Welcome} />
                 <AppStack.Screen name="Main" component={Main} />
-                <AppStack.Screen name="NewEntry" component={NewEntry} initialParams={{
-                    entry: {
-                        id: null,
-                        amount: 0,
-                        entryAt: new Date(),
-                        photo: null,
-                        address: null,
-                        latitude: null,
-                        longitude: null,
-                        category: {id: null, name: 'Selecione'},
-                    }
-                }}/>
+                <AppStack.Screen name="NewEntry" component={NewEntry}/>
                 <AppStack.Screen name="Reports" component={Reports} />
             </AppStack.Navigator>
         </NavigationContainer>

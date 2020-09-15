@@ -13,13 +13,22 @@ import NewEntryDatePicker from './NewEntryDatePicker'
 import NewEntryCameraPicker from './NewEntryCameraPicker'
 import NewEntryAddressPicker from './NewEntryAddressPicker'
 import NewEntryDeleteAction from './NewEntryDeleteAction'
-
 import useEntries from '../../hooks/useEntries'
-
 import Colors from '../../styles/Colors'
+import Service from '../../services/Service'
 
 const NewEntry = ({route, navigation}) => {
-  const entry = route.params.entry
+
+const entry = {
+    id: null,
+    amount: 0,
+    entryAt: new Date(),
+    photo: null,
+    address: null,
+    latitude: null,
+    longitude: null,
+    category: {id: null, name: 'Selecione'}
+}
 
   const [, saveEntry, deleteEntry] = useEntries()
 
