@@ -12,10 +12,10 @@ const EntryList = ({days = 30, category, onEntryPress, onPressActionButton}) => 
 
 	return (
 		<Container
-		title="Últimos lançamentos"
-		actionLabelText={`Últimos ${days} dias`}
-		actionButtonText="Ver mais"
-		onPressActionButton={onPressActionButton}>
+			title="Últimos lançamentos"
+			actionLabelText={`Últimos ${days} dias`}
+			actionButtonText="Ver mais"
+			onPressActionButton={onPressActionButton}>
 		<FlatList
 			data={entries}
 			keyExtractor={item => item.id}

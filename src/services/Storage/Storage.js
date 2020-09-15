@@ -3,36 +3,49 @@ import EntryListItem from '../../components/EntryList/EntryListItem'
 import _ from 'lodash';
 import moment from 'moment'
 
+//Esses comandos limpam o storage
+//const keys = await AsyncStorage.getAllKeys()
+// await AsyncStorage.multiRemove(keys)
+
 export default Storage = {
 	//ENTRIES----------------------------------------------------------------------------------------
 
 	getEntries: async (days, category) => {
+
+		console.log(JSON.parse(await AsyncStorage.getItem('entries')))
 		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
 
 		if (days > 0) {
 			const date = moment().subtract(days, 'days').toDate()
 			// console.log('getEntries :: days ', days)
 
-			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+			entries = entries?.filter(entry => new Date(entry.entryAt) >= date)
 		}
 
-		if (category && category.id) {
+		if (category && category.id && category.id !== 666) {
 			// console.log('getEntries :: category ', category)
-
-			entries = entries.filter(entry => entry.category === category)
+			entries = entries?.filter(entry => entry.category.id === category.id)
 		}
 
-		entries = entries.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
+		entries = entries?.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
 
-		// console.log('getEntries :: entries ', entries.length)
+		// console.log('getEntries :: entries ', entries?.length)
 
 		return entries
 	},
 
+	getAllEntries: async () => {
+		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
+
+		entries = entries?.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
+		return entries
+	},
+
 	saveEntry: async (value, entry) => {
+		console.log('teste')
 
 		let dadoTratado = {
-			id: value.id || entry.id,
+			id: value.id || entry?.id,
 			amount: value.amount || entry.amount || 0,
 			entryAt: value.entryAt || entry.entryAt || new Date(),
 			description: value.category.name,
@@ -48,7 +61,7 @@ export default Storage = {
 
 		let listaEntries = JSON.parse(data) || []
 
-		listaEntries.push(dadoTratado)
+		listaEntries?.push(dadoTratado)
 
 		await AsyncStorage.setItem('entries', JSON.stringify(listaEntries))
 		return listaEntries
@@ -56,7 +69,7 @@ export default Storage = {
 
 	deleteEntry: async (delEntry) => {
 		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
-		entries = entries.filter(entry => JSON.stringify(entry) !== JSON.stringify(delEntry))
+		entries = entries?.filter(entry => JSON.stringify(entry) !== JSON.stringify(delEntry))
 
 		await AsyncStorage.setItem('entries', JSON.stringify(entries))
 
@@ -68,7 +81,15 @@ export default Storage = {
 	setDefaultCategories: async () => {
 		AsyncStorage.setItem('categories', JSON.stringify([
 			{
-				id: 0,
+				id: 666,
+				name: 'Todas Categorias',
+				color: '#ecf0f1',
+				isDebit: false,
+				isCredit: false,
+				isInit: false,
+			},
+			{
+				id: 1,
 				name: 'Alimentação',
 				color: '#1abc9c',
 				isDebit: true,
@@ -76,7 +97,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 1,
+				id: 2,
 				name: 'Restaurantes e Bares',
 				color: '#2ecc71',
 				isDebit: true,
@@ -84,7 +105,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 2,
+				id: 3,
 				name: 'Casa',
 				color: '#3498db',
 				isDebit: true,
@@ -92,7 +113,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 3,
+				id: 4,
 				name: 'Compras',
 				color: '#9b59b6',
 				isDebit: true,
@@ -100,7 +121,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 4,
+				id: 5,
 				name: 'Cuidados Pessoais',
 				color: '#f1c40f',
 				isDebit: true,
@@ -108,7 +129,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 5,
+				id: 6,
 				name: 'Dívidas e Empréstimos',
 				color: '#f39c12',
 				isDebit: true,
@@ -116,7 +137,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 6,
+				id: 7,
 				name: 'Educação',
 				color: '#e67e22',
 				isDebit: true,
@@ -124,7 +145,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 7,
+				id: 8,
 				name: 'Família e Filhos',
 				color: '#d35400',
 				isDebit: true,
@@ -132,7 +153,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 8,
+				id: 9,
 				name: 'Impostos e Taxas',
 				color: '#e74c3c',
 				isDebit: true,
@@ -140,7 +161,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 9,
+				id: 10,
 				name: 'Investimentos',
 				color: '#c0392b',
 				isDebit: true,
@@ -148,7 +169,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 10,
+				id: 11,
 				name: 'Lazer',
 				color: '#ecf0f1',
 				isDebit: true,
@@ -156,7 +177,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 11,
+				id: 12,
 				name: 'Mercado',
 				color: '#bdc3c7',
 				isDebit: true,
@@ -164,7 +185,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 12,
+				id: 13,
 				name: 'Outras Despesas',
 				color: '#95a5a6',
 				isDebit: true,
@@ -173,7 +194,7 @@ export default Storage = {
 			},
 		
 			{
-				id: 13,
+				id: 14,
 				name: 'Empréstimos',
 				color: '#273c75',
 				isDebit: false,
@@ -181,7 +202,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 14,
+				id: 15,
 				name: 'Investimentos',
 				color: '#4cd137',
 				isDebit: false,
@@ -189,7 +210,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 15,
+				id: 16,
 				name: 'Salário',
 				color: '#487eb0',
 				isDebit: false,
@@ -197,7 +218,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 16,
+				id: 17,
 				name: 'Outras Receitas',
 				color: '#8c7ae6',
 				isDebit: false,
@@ -205,7 +226,7 @@ export default Storage = {
 				isInit: false,
 			},
 			{
-				id: 17,
+				id: 18,
 				name: 'Saldo Inicial',
 				color: '#27ae60',
 				isDebit: false,
@@ -242,10 +263,11 @@ export default Storage = {
 		if (untilDays > 0) {
 			const date = moment().subtract(untilDays, 'days').toDate()
 		
-			entries = entries.filter(entry => new Date(entry.entryAt) < date)
+			entries = entries?.filter(entry => new Date(entry.entryAt) < date)
 		}
+		let resultado = entries?.reduce( ( soma, { amount } ) => soma+amount,0)
 
-		return entries.reduce( ( soma, { amount } ) => soma+amount,0)
+		return Number((resultado).toFixed(2))
 	},
 
 	getBalanceSumByDate: async (days) => {
@@ -255,10 +277,10 @@ export default Storage = {
 		if (days > 0) {
 			const date = moment().subtract(days, 'days').toDate()
 
-			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+			entries = entries?.filter(entry => new Date(entry.entryAt) >= date)
 		}
 
-		entries = entries.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
+		entries = entries?.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
 
 		entries = _(entries)
 			.groupBy(({entryAt}) => moment(entryAt).format('YYYYMMDD'))
@@ -271,7 +293,7 @@ export default Storage = {
 			)
 			})
 
-		console.log('getBalanceSumByDate :: ', JSON.stringify(entries))
+		// console.log('getBalanceSumByDate :: ', JSON.stringify(entries))
 
 		return entries
 
@@ -283,7 +305,7 @@ export default Storage = {
 		if (days > 0) {
 			const date = moment().subtract(days, 'days').toDate()
 
-			entries = entries.filter(entry => new Date(entry.entryAt) >= date)
+			entries = entries?.filter(entry => new Date(entry.entryAt) >= date)
 		}
 
 		entries = _(entries)

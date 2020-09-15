@@ -11,6 +11,10 @@ if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
             return await Storage.getEntries(days, category)
         },
 
+        getAllEntries: async () => {
+            return await Storage.getAllEntries()
+        },
+
         saveEntry: async (value, entry = {}) => {
             return await Storage.saveEntry(value, entry = {})
         },

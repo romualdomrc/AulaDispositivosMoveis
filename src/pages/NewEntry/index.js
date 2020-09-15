@@ -95,7 +95,7 @@ const NewEntry = ({ navigation }) => {
 			</View>
 				<ActionFooter>
 					<ActionPrimaryButton
-						title={entry.id ? 'Salvar' : 'Adicionar'}
+						title={entry?.id ? 'Salvar' : 'Adicionar'}
 						onPress={() => {
 							isValid() && onSave()
 						}}

@@ -15,13 +15,13 @@ const Main = ({navigation}) => {
 				/>
 				<EntryList
 					onEntryPress={entry => navigation.navigate('NewEntry', {entry}) }
-					onPressActionButton={() => navigation.navigate('Reports')}
+					onPressActionButton={() => navigation.navigate('Reports') }
 				/>
 			</View>
 		</View>
 	)
 }
-
+//FIXME
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,

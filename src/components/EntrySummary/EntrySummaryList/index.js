@@ -5,7 +5,6 @@ import EntrySummaryListItem from './EntrySummaryListItem'
 
 const EntrySummaryList = ({data}) => {
 	return (
-		// <View><Text>dasdasd</Text></View>
 		<FlatList
 			style={styles.container}
 			data={data}
@@ -17,7 +16,7 @@ const EntrySummaryList = ({data}) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 1
 	}
 })
 

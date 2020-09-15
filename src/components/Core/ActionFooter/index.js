@@ -11,9 +11,9 @@ const ActionFooter = ({children}) => {
   );
 };
 
-export const ActionPrimaryButton = ({title, onPress}) => {
+export const ActionPrimaryButton = ({title, onPress, disabled = false}) => {
   return (
-    <TouchableOpacity style={styles.primaryButton} onPress={onPress}>
+    <TouchableOpacity style={styles.primaryButton} onPress={onPress} disabled={disabled}>
       <Text style={styles.primaryButtonText}>{title}</Text>
     </TouchableOpacity>
   );

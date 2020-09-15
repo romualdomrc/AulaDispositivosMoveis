@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Image, StyleSheet } from 'react-native'
 import ActionFooter, { ActionPrimaryButton } from '../../components/Core/ActionFooter'
 import WelcomeMessage from './WelcomeMessage'
@@ -7,14 +7,14 @@ import useCategories from '../../hooks/useCategories'
 import { setInitialized } from '../../services/Storage/Welcome'
 import Colors from '../../styles/Colors'
 import Logo from '../../assets/logo-white.png'
-import Storage from '../../services/Storage/Storage'
+import Service from '../../services/Service'
 
 const Welcome = ({navigation}) => {
 	const [, , , initCategories] = useCategories()
 	const [amount, setAmount] = useState(0)
 
 	const onSavePress = () => {
-		Storage.saveEntry({
+		Service.saveEntry({
 			amount: parseFloat(amount),
 			isInit: true,
 			category: initCategories,

@@ -1,11 +1,8 @@
 import React from 'react'
 import {View, StyleSheet} from 'react-native'
-
 import Container from '../Core/Container'
-
 import EntrySummaryChart from './EntrySummaryChart'
 import EntrySummaryList from './EntrySummaryList'
-
 import useBalanceSumByCategory from '../../hooks/useBalanceSumByCategory'
 
 const EntrySummary = ({days = 7, onPressActionButton}) => {

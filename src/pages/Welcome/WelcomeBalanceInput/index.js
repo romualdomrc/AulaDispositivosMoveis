@@ -11,6 +11,7 @@ const WelcomeBalanceInput = ({value, onChangeValue}) => {
 				value={value}
 				startWithDebit={false}
 				onChangeValue={onChangeValue}
+				disabled={true}
 			/>
 		</View>
 	)

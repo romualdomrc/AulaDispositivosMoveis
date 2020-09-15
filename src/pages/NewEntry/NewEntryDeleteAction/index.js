@@ -10,14 +10,14 @@ const NewEntryDeleteAction = ({entry, onOkPress}) => {
 			'Você deseja realmente apagar este lançamento?',
 			[
 				{text: 'Não', style: 'cancel'},
-				{text: 'Sim', onPress: () => onOkPress()},
+				{text: 'Sim', onPress: () => onOkPress()}
 			],
 			{cancelable: false}
 		)
 	}
 
 	return (
-		entry.id && (
+		entry?.id && (
 		<View>
 			<TouchableOpacity style={styles.button} onPress={onDelete}>
 			<Icon name="delete" size={30} color={Colors.white} />
