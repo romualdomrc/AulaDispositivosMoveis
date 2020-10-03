@@ -20,7 +20,7 @@ if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
         },
 
         deleteEntry: async (entry) => {
-            return await Storage.findEntry(entry)
+            return await Storage.deleteEntry(entry)
         },
 
         //CATEGORIES----------------------------------------------------------------------------------------

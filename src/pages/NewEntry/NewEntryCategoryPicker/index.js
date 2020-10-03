@@ -22,7 +22,7 @@ const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
 			onPress={() => {
 				setModalVisible(true)
 			}}>
-			<Text style={styles.pickerButtonText}>{category.name}</Text>
+			<Text style={styles.pickerButtonText}>{category?.name}</Text>
 		</TouchableOpacity>
 		<CategoryModal
 			categoryType={debit ? 'debit' : 'credit'}

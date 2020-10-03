@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Colors from '../../../styles/Colors'
 
 const NewEntryDeleteAction = ({entry, onOkPress}) => {
+
 	const onDelete = () => {
 		Alert.alert(
 			'Apagar?',
@@ -17,13 +18,14 @@ const NewEntryDeleteAction = ({entry, onOkPress}) => {
 	}
 
 	return (
-		entry?.id && (
-		<View>
-			<TouchableOpacity style={styles.button} onPress={onDelete}>
-			<Icon name="delete" size={30} color={Colors.white} />
-			</TouchableOpacity>
-		</View>
-		)
+		<> 
+		{entry.amount !==0 && <View>
+				<TouchableOpacity style={styles.button} onPress={onDelete}>
+				<Icon name="delete" size={30} color={Colors.white} />
+				</TouchableOpacity>
+			</View>}
+			
+		</>
 	)
 }
 

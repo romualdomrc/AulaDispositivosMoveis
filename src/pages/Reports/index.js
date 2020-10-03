@@ -63,7 +63,7 @@ const Reports = ({navigation}) => {
 			<TouchableOpacity
 				style={styles.filterButton}
 				onPress={() => { setCategoryModalVisible(true) }}>
-			<Text style={styles.filterButtonText}>{category.name}</Text>
+			<Text style={styles?.filterButtonText}>{category?.name}</Text>
 			<Icon
 				name="keyboard-arrow-down"
 				size={20}

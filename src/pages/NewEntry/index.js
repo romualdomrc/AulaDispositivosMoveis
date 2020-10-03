@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import {View,StatusBar, StyleSheet} from 'react-native'
 import ActionFooter, { ActionPrimaryButton, ActionSecondaryButton } from '../../components/Core/ActionFooter'
 import BalanceLabel from '../../components/BalanceLabel'
@@ -11,18 +11,48 @@ import NewEntryDeleteAction from './NewEntryDeleteAction'
 import useEntries from '../../hooks/useEntries'
 import Colors from '../../styles/Colors'
 
-const NewEntry = ({ navigation }) => {
-	const entry = {
-		id: null,
-		amount: 0,
-		entryAt: new Date(),
-		photo: null,
-		address: null,
-		latitude: null,
-		longitude: null,
-		category: {id: null, name: 'Selecione'}
-	}
+const NewEntry = ({ navigation, route }) => {
+	
+	useEffect(() => {
+		(function setInitialEntry() {
+			if(route?.params?.entry) {
+				setEntry(route.params.entry)
+				setDebit(route.params.entry.amount <= 0)
+				setAmount(route.params.entry.amount)
+				setCategory(route.params.entry.category)
+				setEntryAt(route.params.entry.entryAt)
+				setPhoto(route.params.entry.photo)
+				setAddress(route.params.entry.address)
+				setLatitude(route.params.entry.latitude)
+				setLongitude(route.params.entry.longitude)
+				setIsAdd(false)
+			} else {
+				var initial = {
+					id: null,
+					amount: 0,
+					entryAt: new Date(),
+					photo: null,
+					address: null,
+					latitude: null,
+					longitude: null,
+					category: {id: null, name: 'Selecione'}
+				}
+				setEntry(initial)
 
+				setDebit(initial.amount <= 0)
+				setAmount(initial.amount)
+				setCategory(initial.category)
+				setEntryAt(initial.entryAt)
+				setPhoto(initial.photo)
+				setAddress(initial.address)
+				setLatitude(initial.latitude)
+				setLongitude(initial.longitude)
+				setIsAdd(true)
+			}
+		})()
+	},[])
+
+	const [entry, setEntry] = useState({})
 	const [, saveEntry, deleteEntry] = useEntries()
 	const [debit, setDebit] = useState(entry.amount <= 0)
 	const [amount, setAmount] = useState(entry.amount)
@@ -32,6 +62,7 @@ const NewEntry = ({ navigation }) => {
 	const [address, setAddress] = useState(entry.address)
 	const [latitude, setLatitude] = useState(entry.latitude)
 	const [longitude, setLongitude] = useState(entry.longitude)
+	const [isAdd, setIsAdd] = useState(true)
 
 	const isValid = () => {
 		return parseFloat(amount) !== 0
@@ -39,7 +70,7 @@ const NewEntry = ({ navigation }) => {
 
   	const onSave = () => {
 		const data = {
-		amount: parseFloat(amount),
+		amount: -parseFloat(amount),
 		category: category,
 		photo: photo,
 		address: address,
@@ -47,8 +78,10 @@ const NewEntry = ({ navigation }) => {
 		longitude: longitude,
 		entryAt: entryAt,
 		}
-
-		// console.log('NewEntry :: save ', data)
+		
+		if(data.category.name === "Selecione") {
+			return
+		}
 		saveEntry(data, entry)
 		onClose()
   	}
@@ -90,7 +123,7 @@ const NewEntry = ({ navigation }) => {
 						setAddress(address)
 					}}
 				/>
-				<NewEntryDeleteAction entry={entry} onOkPress={onDelete} />
+				<NewEntryDeleteAction entry={entry} onOkPress={onDelete} isAdd={isAdd} />
 			</View>
 			</View>
 				<ActionFooter>

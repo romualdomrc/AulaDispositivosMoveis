@@ -11,25 +11,22 @@ export default Storage = {
 	//ENTRIES----------------------------------------------------------------------------------------
 
 	getEntries: async (days, category) => {
+		// const keys = await AsyncStorage.getAllKeys()
+		// await AsyncStorage.multiRemove(keys)
 
-		console.log(JSON.parse(await AsyncStorage.getItem('entries')))
 		var entries = JSON.parse(await AsyncStorage.getItem('entries'))
 
 		if (days > 0) {
 			const date = moment().subtract(days, 'days').toDate()
-			// console.log('getEntries :: days ', days)
 
 			entries = entries?.filter(entry => new Date(entry.entryAt) >= date)
 		}
 
 		if (category && category.id && category.id !== 666) {
-			// console.log('getEntries :: category ', category)
 			entries = entries?.filter(entry => entry.category.id === category.id)
 		}
 
 		entries = entries?.sort((e1, e2) => new Date(e2.entryAt) - new Date(e1.entryAt))
-
-		// console.log('getEntries :: entries ', entries?.length)
 
 		return entries
 	},
@@ -42,19 +39,17 @@ export default Storage = {
 	},
 
 	saveEntry: async (value, entry) => {
-		console.log('teste')
-
 		let dadoTratado = {
-			id: value.id || entry?.id,
-			amount: value.amount || entry.amount || 0,
-			entryAt: value.entryAt || entry.entryAt || new Date(),
-			description: value.category.name,
-			photo: value.photo,
-			address: value.address,
-			latitude: value.latitude,
-			longitude: value.longitude,
-			isInit: value.isInit || false,
-			category: value.category || entry.category
+			id: value?.id || entry?.id,
+			amount: value?.amount || entry?.amount || 0,
+			entryAt: value?.entryAt || entry?.entryAt || new Date(),
+			description: value?.category?.name,
+			photo: value?.photo,
+			address: value?.address,
+			latitude: value?.latitude,
+			longitude: value?.longitude,
+			isInit: value?.isInit || false,
+			category: value?.category || entry?.category
 		}
 
 		let data = await AsyncStorage.getItem('entries')
@@ -293,8 +288,6 @@ export default Storage = {
 			)
 			})
 
-		// console.log('getBalanceSumByDate :: ', JSON.stringify(entries))
-
 		return entries
 
 	},
@@ -331,8 +324,6 @@ export default Storage = {
 			entries = [...data1, ...data2]
 		}
 		
-		// console.log('getBalanceSumByCategory :: ', JSON.stringify(entries))
-	
 		return entries
 	}
 }
