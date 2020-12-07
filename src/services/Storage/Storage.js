@@ -262,7 +262,7 @@ export default Storage = {
 		}
 		let resultado = entries?.reduce( ( soma, { amount } ) => soma+amount,0)
 
-		return Number((resultado).toFixed(2))
+		return Number((resultado)?.toFixed(2))
 	},
 
 	getBalanceSumByDate: async (days) => {

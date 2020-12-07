@@ -13,14 +13,14 @@ const Welcome = ({navigation}) => {
 	const [, , , initCategories] = useCategories()
 	const [amount, setAmount] = useState(0)
 
-	const onSavePress = () => {
-		Service.saveEntry({
+	const onSavePress = async () => {
+		await Service.saveEntry({
 			amount: parseFloat(amount),
 			isInit: true,
 			category: initCategories,
 		})
 
-		setInitialized()
+		await setInitialized()
 		navigation.navigate('Main')
 	}
 

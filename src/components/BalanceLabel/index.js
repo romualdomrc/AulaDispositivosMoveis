@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
 
-import useBalance from '../../hooks/useBalance'
+import Service from '../../services/Service'
 
 import Colors from '../../styles/Colors'
 
 const BalanceLabel = () => {
-  const [balance] = useBalance()
+  const [balance, setBalance] = useState()
+
+  useEffect(()=> {
+    loadBalance
+  },[])
+
+  const loadBalance = async() => {
+    setBalance(await Service.getBalance())
+  }
 
   return (
     <View style={styles.container}>

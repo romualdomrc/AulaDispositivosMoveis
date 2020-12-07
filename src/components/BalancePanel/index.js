@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {StatusBar, View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -6,18 +6,20 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import BalancePanelLabel from './BalancePanelLabel'
 import BalancePanelChart from './BalancePanelChart'
 
-import useBalance from '../../hooks/useBalance'
-
 import Colors from '../../styles/Colors'
 
-const BalancePanel = ({onNewEntryPress}) => {
-  const [balance] = useBalance()
+const BalancePanel = ({onNewEntryPress, balance}) => {
+  const [thisBalance, setBalance] = useState(balance)
+
+  useEffect(()=>{
+    setBalance(balance)
+  },[balance])
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.violet} />
       <View>
-        <BalancePanelLabel currentBalance={balance} />
+        <BalancePanelLabel currentBalance={thisBalance} />
         <BalancePanelChart />
       </View>
       <TouchableOpacity style={styles.button} onPress={onNewEntryPress}>
