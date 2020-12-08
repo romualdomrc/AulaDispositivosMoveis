@@ -6,7 +6,7 @@ import EntryList from '../../components/EntryList'
 import Colors from '../../styles/Colors'
 import Service from '../../services/Service'
 
-const Main = ({navigation}) => {
+const Main = ({navigation, route}) => {
 	const days = 7
 	const entryListDays = 30
 	const [balance, setBalance] = useState()
@@ -22,7 +22,7 @@ const Main = ({navigation}) => {
 	  loadBalance()
 	  loadBalanceSumByCategory()
 	  loadEntries()
-	},[])
+	},[route.params?.render])
   
 	const loadBalance = async() => {
 	  setBalance(await Service.getBalance())

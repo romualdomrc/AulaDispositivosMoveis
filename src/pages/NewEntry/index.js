@@ -8,8 +8,8 @@ import NewEntryDatePicker from './NewEntryDatePicker'
 import NewEntryCameraPicker from './NewEntryCameraPicker'
 import NewEntryAddressPicker from './NewEntryAddressPicker'
 import NewEntryDeleteAction from './NewEntryDeleteAction'
-import useEntries from '../../hooks/useEntries'
 import Colors from '../../styles/Colors'
+import Service from '../../services/Service'
 
 const NewEntry = ({ navigation, route }) => {
 	
@@ -53,7 +53,6 @@ const NewEntry = ({ navigation, route }) => {
 	},[])
 
 	const [entry, setEntry] = useState({})
-	const [, saveEntry, deleteEntry] = useEntries()
 	const [debit, setDebit] = useState(entry.amount <= 0)
 	const [amount, setAmount] = useState(entry.amount)
 	const [category, setCategory] = useState(entry.category)
@@ -68,7 +67,7 @@ const NewEntry = ({ navigation, route }) => {
 		return parseFloat(amount) !== 0
 	}
 
-  	const onSave = () => {
+  	const onSave = async () => {
 		const data = {
 		amount: -parseFloat(amount),
 		category: category,
@@ -82,17 +81,22 @@ const NewEntry = ({ navigation, route }) => {
 		if(data.category.name === "Selecione") {
 			return
 		}
-		saveEntry(data, entry)
+
+		if(!isAdd) {
+			await Service.deleteEntry(entry)
+		}
+
+		await Service.saveEntry(data, entry)
 		onClose()
   	}
 
-	const onDelete = () => {
-		deleteEntry(entry)
+	const onDelete = async () => {
+		await Service.deleteEntry(entry)
 		onClose()
 	}
 
 	const onClose = () => {
-		navigation.goBack()
+		navigation.navigate('Main', {render: Math.random()})
 	}
 
 	return (

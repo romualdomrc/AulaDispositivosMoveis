@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import EntryListItem from '../../components/EntryList/EntryListItem'
 import _ from 'lodash';
 import moment from 'moment'
+import Colors from '../../styles/Colors'
 
 //Esses comandos limpam o storage
 //const keys = await AsyncStorage.getAllKeys()
@@ -303,7 +304,13 @@ export default Storage = {
 
 		entries = _(entries)
 			.groupBy(({category: {id}}) => id)
-			.map(entry => ({category: _.omit(entry[0].category, 'entries'), amount: Math.abs(_.sumBy(entry, 'amount'))}))
+			.map(entry => (
+				{	
+					entryAt: entry[0].entryAt,
+					category: _.omit(entry[0].category, 'entries'),
+					amount: Math.abs(_.sumBy(entry, 'amount'))
+				}
+			))
 			.filter(({amount}) => amount > 0)
 			.orderBy('amount', 'desc')
 
