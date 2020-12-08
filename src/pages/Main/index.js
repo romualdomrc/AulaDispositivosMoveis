@@ -7,14 +7,30 @@ import Colors from '../../styles/Colors'
 import Service from '../../services/Service'
 
 const Main = ({navigation}) => {
+	const days = 7
+	const entryListDays = 30
 	const [balance, setBalance] = useState()
+	const [balanceSum, setBalanceSum] = useState([])
+	const [entries, setEntries] = useState([])
+
+	const loadEntries = async () => {
+		const data = await Service.getEntries(entryListDays, null)
+		setEntries(data)
+	}
 
 	useEffect(()=> {
 	  loadBalance()
+	  loadBalanceSumByCategory()
+	  loadEntries()
 	},[])
   
 	const loadBalance = async() => {
 	  setBalance(await Service.getBalance())
+	}
+
+	const loadBalanceSumByCategory = async() => {
+		const data = await Service.getBalanceSumByCategory(days)
+		setBalanceSum([...data])
 	}
 
 	
@@ -22,10 +38,10 @@ const Main = ({navigation}) => {
 		<View style={styles.container}>
 			<BalancePanel balance={balance} onNewEntryPress={() => navigation.navigate('NewEntry')} />
 			<View>
-				<EntrySummary
-					onPressActionButton={() => navigation.navigate('Reports')}
-				/>
+				<EntrySummary days={days} balanceSum={balanceSum} onPressActionButton={() => navigation.navigate('Reports')}/>
 				<EntryList
+					entries={entries}
+					days={entryListDays}
 					onEntryPress={entry => navigation.navigate('NewEntry', {entry}) }
 					onPressActionButton={() => navigation.navigate('Reports') }
 				/>

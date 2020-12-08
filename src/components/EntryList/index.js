@@ -1,14 +1,16 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {FlatList} from 'react-native'
 
 import Container from '../Core/Container'
 
 import EntryListItem from './EntryListItem'
 
-import useEntries from '../../hooks/useEntries'
+const EntryList = ({onEntryPress, onPressActionButton, entries, days}) => {
+	const [thisEntries, setThisEntries] = useState()
 
-const EntryList = ({days = 30, category, onEntryPress, onPressActionButton}) => {
-	const [entries] = useEntries(days, category)
+	useEffect(()=>{
+		setThisEntries(entries)
+	},[entries])
 
 	return (
 		<Container
@@ -17,13 +19,13 @@ const EntryList = ({days = 30, category, onEntryPress, onPressActionButton}) => 
 			actionButtonText="Ver mais"
 			onPressActionButton={onPressActionButton}>
 		<FlatList
-			data={entries}
+			data={thisEntries}
 			keyExtractor={item => item.id}
 			renderItem={({item, index}) => (
 				<EntryListItem
 					entry={item}
 					isFirstItem={index === 0}
-					isLastItem={index === entries.length - 1}
+					isLastItem={index === thisEntries.length - 1}
 					onEntryPress={onEntryPress}
 				/>
 			)}

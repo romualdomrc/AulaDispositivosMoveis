@@ -3,10 +3,13 @@ import {View, StyleSheet} from 'react-native'
 import Container from '../Core/Container'
 import EntrySummaryChart from './EntrySummaryChart'
 import EntrySummaryList from './EntrySummaryList'
-import useBalanceSumByCategory from '../../hooks/useBalanceSumByCategory'
 
-const EntrySummary = ({days = 7, onPressActionButton}) => {
-	const [balanceSum] = useBalanceSumByCategory(days)
+const EntrySummary = ({days = 7, onPressActionButton, balanceSum}) => {
+	const [thisBalanceSum, setBalanceSum] = useState([])
+
+	useEffect(()=> {
+		setBalanceSum(balanceSum)
+	},[balanceSum])
 
 	return (
 		<Container
@@ -15,8 +18,8 @@ const EntrySummary = ({days = 7, onPressActionButton}) => {
 			actionButtonText="Ver mais"
 			onPressActionButton={onPressActionButton}>
 			<View style={styles.inner}>
-				<EntrySummaryChart data={balanceSum} />
-				<EntrySummaryList data={balanceSum} />
+				<EntrySummaryChart data={thisBalanceSum} />
+				<EntrySummaryList data={thisBalanceSum} />
 			</View>
 		</Container>
 	)
