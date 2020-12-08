@@ -327,10 +327,8 @@ export default Storage = {
 						.sum(),
 				}
 			]
-		
 			entries = [...data1, ...data2]
 		}
-		
 		return entries
 	}
 }

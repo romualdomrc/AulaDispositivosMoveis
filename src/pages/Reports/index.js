@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { StatusBar, View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import ActionFooter, { ActionPrimaryButton } from '../../components/Core/ActionFooter'
@@ -8,6 +8,7 @@ import EntryList from '../../components/EntryList'
 import RelativeDaysModal from '../../components/RelativeDaysModal'
 import CategoryModal from '../../components/CategoryModal'
 import Colors from '../../styles/Colors'
+import Service from '../../services/Service'
 
 const Reports = ({navigation}) => {
 	const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(false)
@@ -17,6 +18,8 @@ const Reports = ({navigation}) => {
 		id: null,
 		name: 'Todas Categorias'
 	})
+	const [balanceSum, setBalanceSum] = useState([])
+	const [entries, setEntries] = useState([])
 
 	const onRelativeDaysPress = item => {
 		setRelativeDays(item)
@@ -34,6 +37,22 @@ const Reports = ({navigation}) => {
 
 	const onCategoryClosePress = () => {
 		setCategoryModalVisible(false)
+	}
+
+	useEffect(()=> {
+		loadBalanceSumByCategory()
+		loadEntries()
+	},[category])
+
+	  
+	const loadEntries = async () => {
+		const data = await Service.getEntries(relativeDays, category)
+		setEntries(data)
+	}
+  
+	const loadBalanceSumByCategory = async() => {
+		const data = await Service.getBalanceSumByCategory(relativeDays, null, category, true)
+		setBalanceSum([...data])
 	}
 
 	return (
@@ -79,8 +98,8 @@ const Reports = ({navigation}) => {
 		</View>
 
 		<View>
-			<EntrySummary days={relativeDays} />
-			<EntryList days={relativeDays} category={category} />
+			<EntrySummary days={relativeDays} balanceSum={balanceSum}/>
+			<EntryList days={relativeDays} category={category} entries={entries} />
 		</View>
 
 		<ActionFooter>
