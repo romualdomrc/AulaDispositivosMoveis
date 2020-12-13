@@ -1,4 +1,5 @@
 import Storage from './Storage/Storage'
+import StorageCloud from './StorageCloud/StorageCloud'
 import { CONNECTION_TYPES, DATABASE_CONNECTION} from './Config/database-configuration'
 
 var Service = {}
@@ -68,59 +69,59 @@ if(CONNECTION_TYPES.LOCAL === DATABASE_CONNECTION) {
         //ENTRIES----------------------------------------------------------------------------------------
 
         getEntries: async (days, category) => {
-            return await Storage.getEntries(days, category)
+            return await StorageCloud.getEntries(days, category)
         },
 
         getAllEntries: async () => {
-            return await Storage.getAllEntries()
+            return await StorageCloud.getAllEntries()
         },
 
         saveEntry: async (value, entry = {}) => {
-            return await Storage.saveEntry(value, entry = {})
+            return await StorageCloud.saveEntry(value, entry = {})
         },
 
         deleteEntry: async (entry) => {
-            return await Storage.deleteEntry(entry)
+            return await StorageCloud.deleteEntry(entry)
         },
 
         //CATEGORIES----------------------------------------------------------------------------------------
 
         setDefaultCategories: async () => {
-            return await Storage.setDefaultCategories()
+            return await StorageCloud.setDefaultCategories()
         },
 
         getDefaultCategories: async () => {
-            return await Storage.getDefaultCategories()
+            return await StorageCloud.getDefaultCategories()
         },
 
         getDebitCategories: async () => {
-            return Storage.getDebitCategories()
+            return StorageCloud.getDebitCategories()
         },
 
         getCreditCategories: async () => {
-            return Storage.getCreditCategories()
+            return StorageCloud.getCreditCategories()
         },
 
         getAllCategories: async () => {
-            return Storage.getAllCategories()
+            return StorageCloud.getAllCategories()
         },
 
         getInitCategories: async () => {
-            return Storage.getInitCategories()
+            return StorageCloud.getInitCategories()
         },
 
         //BALANCE----------------------------------------------------------------------------------------
 
         getBalance: async (untilDays = 0) => {
-            return Storage.getBalance(untilDays)
+            return StorageCloud.getBalance(untilDays)
         },
 
         getBalanceSumByDate: async (days) => {
-            return Storage.getBalanceSumByDate(days)
+            return StorageCloud.getBalanceSumByDate(days)
         },
 
         getBalanceSumByCategory: (days, showOthers = true) => {
-            return Storage.getBalanceSumByCategory(days, showOthers)
+            return StorageCloud.getBalanceSumByCategory(days, showOthers)
         }
     }
 }
