@@ -1,6 +1,6 @@
 // import firebase from './Firebase'
 import Sqlite from './Sqlite'
-import {CONNECTION_TYPES, DATABASE_CONNECTION} from '../Config/database-configuration'
+import {CONNECTION_TYPES, DATABASE_CONNECTION} from '../../Config/database-configuration'
 
 // else if(DATABASE_CONNECTION == CONNECTION_TYPES.CLOUD) {
 //     updateContentDB = (id,data, database) => {
