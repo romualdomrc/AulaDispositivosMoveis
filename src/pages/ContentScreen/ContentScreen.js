@@ -1,19 +1,12 @@
-import React from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
-//import firebase from '../database/Firebase'
-import Sqlite from '../database/Sqlite';
-
-import { Fab, TexT, VieW } from "../styles/styles";
-import ContentItem from '../components/ContentItem';
-
-import { useNavigation } from '@react-navigation/native';
-
-const db = new Sqlite();
-let database;
-
+import React from 'react'
+import { ActivityIndicator, ScrollView } from 'react-native'
+import { Fab, TexT, VieW } from "../../styles/styles"
+import ContentItem from '../../components/ContentItem'
+import { useNavigation } from '@react-navigation/native'
+import * as ContentScreenService from '../../database/application-service'
 
 class ContentScreen extends React.Component {
-
+    
     constructor(props){
         super(props);
 
@@ -24,39 +17,20 @@ class ContentScreen extends React.Component {
     }
 
     componentDidMount() {
-//       firebase.firestore().collection('contents').onSnapshot((query)=>this.contentUpdate(query));
-        database = db.initDB();
         const { navigation } = this.props;
         navigation.addListener('focus', ()=>{
-            this.contentUpdate();
-        });
-    }
-/*
-    contentUpdate(query){
-        const contents = [];
-        query.forEach((doc) => {
-            const { name, desc, img } = doc.data();
-            contents.push({
-                id: doc.id,
-                name,
-                desc,
-                img
-            }) 
-        });
-        this.setState({
-           contents,
-           isLoading: false,
+            this.contentUpdatePage();
         })
+        this.contentUpdatePage()
     }
-*/
 
-    contentUpdate(){
+    contentUpdatePage(){
         console.log('contentUpdate');
         let contents = [];
-
-        db.listContents(database).then((data) => {
-            console.log("data ", data);
-            contents = data;
+        ContentScreenService.findContentList()
+        .then((data) => {
+            contents = data && (data.list || []) 
+            database = data && (data.database || {}) 
             this.setState({
               contents,
               isLoading: false,
@@ -86,16 +60,17 @@ class ContentScreen extends React.Component {
         const { contents } = this.state; 
         const { navigation } = this.props;
 
-        const items = contents.map((content, index) =>
+        const items = contents ? contents.map((content, index) =>
                 <ContentItem name={content.name}
                     desc={content.desc}
                     img={content.img}
                     id={content.id}
+                    key={index}
                     onPress={()=>navigation.navigate('ContentDetailScreen',
                     ({ id: content.id , desc: content.desc, name: content.name, img: content.img, database: database})
                     
                     )}/>
-            );
+            ) : []
 
         return(
             <VieW>

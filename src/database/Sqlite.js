@@ -40,12 +40,12 @@ export default class Sqlite {
             db.transaction((tx) => {
               tx.executeSql('SELECT c.id, c.name, c.img, c.desc FROM Content c',[],
                 (_, { rows }) => {
-                console.log("Retornou corretamente", rows);
+                // console.log("Retornou corretamente", rows);
                 
                 var len = rows.length;
                 for (let i = 0; i < len; i++) {
                   let row = rows.item(i);
-                  console.log(`Content ID: ${row.id}, Content Name: ${row.name}`);
+                //   console.log(`Content ID: ${row.id}, Content Name: ${row.name}`);
                   
                   const { id, name, img, desc } = row;
                   
@@ -57,7 +57,7 @@ export default class Sqlite {
                   });
                 }
 
-                console.log(contents);
+                // console.log(contents);
 
                 resolve(contents);
               });
