@@ -72,6 +72,7 @@ class ContentDetailScreen extends React.Component {
     const { navigation } = this.props;
 
     console.log("id a ser apagado ", id);
+    
     const { database } = this.props.route.params;
 
 
